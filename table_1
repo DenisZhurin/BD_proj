@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 st.set_page_config(layout = "wide")
-data = pd.read_csv('data.csv')
+data = pd.read_csv('https://github.com/DenisZhurin/BD_proj/blob/0112ca88c66d310183c0edbe214771923f6ff1ba/data.csv?raw=true')
 data['Price(Unit_price*Quantity)'] = round(data['Quantity']*data['Unit_price($)'], 2) #Кол-во на цену одной позиции
 data['Tax_price'] = round(data['Price(Unit_price*Quantity)']*0.05, 2)
 data['Total'] = round(data['Price(Unit_price*Quantity)']*0.05+data['Price(Unit_price*Quantity)'], 2)
