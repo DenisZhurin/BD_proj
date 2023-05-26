@@ -1,0 +1,13 @@
+import pandas as pd
+import streamlit as st
+st.set_page_config(layout = "wide")
+data = pd.read_csv('data.csv')
+data['Price(Unit_price*Quantity)'] = round(data['Quantity']*data['Unit_price($)'], 2) #Кол-во на цену одной позиции
+data['Tax_price'] = round(data['Price(Unit_price*Quantity)']*0.05, 2)
+data['Total'] = round(data['Price(Unit_price*Quantity)']*0.05+data['Price(Unit_price*Quantity)'], 2)
+
+sums = pd.DataFrame([[str('Amount:'), "", "", "", "", sum(data['Quantity']),"","","",round(sum(data['Price(Unit_price*Quantity)']), 2), round(sum(data['Tax_price']), 2),""]], columns=data.columns)
+finish = pd.DataFrame([[str('Result:'), sum(data['Total']), "", "", "", "", "", "", "","","",""]], columns=data.columns)
+data = pd.concat([data, sums])
+data = pd.concat([data, finish])
+st.write(data)
